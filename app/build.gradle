@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 25
@@ -28,4 +29,6 @@ dependencies {
     compile files('libs/gson-2.2.2.jar')
     compile files('libs/mobileservices-1.1.5.jar')
     compile group: 'cz.msebera.android' , name: 'httpclient', version: '4.4.1.1'
+    debugCompile 'com.github.jonasrottmann.realm-browser:realm-browser:v0.0.8'
+    releaseCompile 'com.github.jonasrottmann.realm-browser:realm-browser-no-op:v0.0.8'
 }
