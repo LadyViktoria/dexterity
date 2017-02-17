@@ -1,22 +1,21 @@
 package com.ht1.dexterity.app;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.util.Date;
-
-import org.apache.commons.net.time.TimeTCPClient;
-import org.apache.commons.net.time.TimeUDPClient;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
+
+import org.apache.commons.net.time.TimeTCPClient;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.HttpStatus;
+import cz.msebera.android.httpclient.StatusLine;
+import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 
 public class TimeWrapper {
 	private static final String TAG = "tzachi";
@@ -39,7 +38,7 @@ public class TimeWrapper {
                 client.connect(host);
                 //System.out.println(client.getDate());
                 time = (client.getTime() - TimeTCPClient.SECONDS_1900_TO_1970) * 1000;
-                Log.e(TAG,"Time returned by ntpTcpTime (in MS)" + time);  
+                Log.e(TAG,"Time returned by ntpTcpTime (in MS)" + time);
             } finally {
                 client.disconnect();
             }
@@ -57,7 +56,7 @@ public class TimeWrapper {
             //Make the Http connection so we can retrieve the time
             HttpClient httpclient = new DefaultHttpClient();
             // I am using yahoos api to get the time
-            HttpResponse response = httpclient.execute(new 
+            HttpResponse response = httpclient.execute(new
                     HttpGet("http://developer.yahooapis.com/TimeService/V1/getTime?appid=YahooDemo"));
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
